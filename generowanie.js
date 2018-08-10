@@ -31,9 +31,6 @@ bazy[23] = "WHEEL";
 bazy[24] = "TJH2B";
 bazy[25] = "TUMBL";
 bazy[26] = "WRJSE";
-bazy[27] = "test";
-bazy[28] = "test";
-bazy[29] = "test";
 
 var ilosc = bazy.length - 1;
 
