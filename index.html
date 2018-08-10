@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8" />
+        <title>Matejmatyka JS</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <script src="generowanie.js" defer></script>
+    </head>
+    <body onload="genList()">
+        <div id="lista" >
+        </div>
+        <input type="button" onclick="exportList32()" value="Generuj 32bit">
+        <input type="button" onclick="exportList64()" value="Generuj 64bit">
+        <div id="wygenerowane"></div>
+    </body>
+</html>
