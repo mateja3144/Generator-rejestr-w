@@ -1,62 +1,49 @@
-var startReg = 'Windows Registry Editor Version 5.00</br></br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\SYSTEM-1]</br></br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\SYSTEM-1\\\Aliasy]<br/>"DefaultAlias"=""</br>"AutoDefaultAlias"=dword:00000000';
+var startReg = 'Windows Registry Editor Version 5.00</br></br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\SYSTEM-1]</br></br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\SYSTEM-1\\\Aliasy]<br/>"DefaultAlias"=""</br>"AutoDefaultAlias"=dword:00000000</br>';
 var export32 = "";
 var export64 = "";
 var lista = "";
-
-var bazy = new Array();
-bazy[0] = "AUDYK";
-bazy[1] = "ALD";
-bazy[2] = "AGILE";
-bazy[3] = "AIRJU";
-bazy[4] = "BUD";
-bazy[5] = "DIALO";
-bazy[6] = "EUROE";
-bazy[7] = "GGAUD";
-bazy[8] = "GRUGU";
-bazy[9] = "GGKAN";
-bazy[10] = "GGCOR";
-bazy[11] = "GLOBA";
-bazy[12] = "LARXX";
-bazy[13] = "MONTV";
-bazy[14] = "ORION";
-bazy[15] = "OGLFO";
-bazy[16] = "OGLSE";
-bazy[17] = "PENZI";
-bazy[18] = "STLXX";
-bazy[19] = "REBAU";
-bazy[20] = "GRX";
-bazy[21] = "RUTRO";
-bazy[22] = "ROLFE";
-bazy[23] = "WHEEL";
-bazy[24] = "TJH2B";
-bazy[25] = "TUMBL";
-bazy[26] = "WRJSE";
-bazy[27] = "TEST";
-
+var bazy =["AUDYK", "ALD", "AGILE", "AIRJU", "BUD", "DIALO", "EUROE", "GGAUD", "GRUGU", "GGKAN", "GGCOR", "GLOBA", "LARXX", "MONTV", "ORION", "OGLFO", "OGLSE", "PENZI", "STLXX", "REBAU", "GRX", "RUTRO", "ROLFE", "WHEEL", "TJH2B", "TUMBL", "WRJSE", ]
 var ilosc = bazy.length - 1;
 
 function genList(){
-    for(i=0; i<=ilosc; i++){
+    for(var i=0; i<=ilosc; i++){
         lista = lista + '<input id="'+bazy[i]+'" type="checkbox">'+bazy[i]+' </br>  '
     }
     document.getElementById("lista").innerHTML = lista;
 }
 
+/*function genList () {
+    return bazy.map(function (baza) {
+        var input = document.createElement('input');
+        input.type = 'checkbox';
+        input.id = baza;
+ 
+        return input;
+    }).reduce(function (prev, next) {
+        return prev + '\n' + next.outerHTML;
+    }, '');
+*/
+
 function exportList32(){
     export32 = startReg;
-    for(i=0; i<=ilosc; i++){
-        
+    for(var i=0; i<=ilosc; i++){
+        var ptaszek = document.getElementById(bazy[i]).checked;
+        if(ptaszek == true){
+            export32 = export32 + '</br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\SYSTEM-1\\\Aliasy'+"\\"+''+bazy[i]+']</br>"ServerAdres"="192.168.105.207:/home/bazy/'+bazy[i]+'/SYSTEM-1.S1B"</br>';
+        }
      }
-
-
     document.getElementById("wygenerowane").innerHTML = export32;
 }
 
 function exportList64(){
     export64 = startReg;
-    for(i=0; i<=ilosc; i++){
-       var check = document.getElementById(bazy[i]).checked;
+    for(var i=0; i<=ilosc; i++){
+       var ptaszek = document.getElementById(bazy[i]).checked;
+       if(ptaszek == true){
+            export64 = export64 + '</br>[HKEY_LOCAL_MACHINE\\\SOFTWARE\\\Wow6432Node\\\System-1\\\Aliasy'+"\\"+''+bazy[i]+']</br>"ServerAdres"="192.168.105.207:/home/bazy/'+bazy[i]+'/SYSTEM-1.S1B"</br>';
+       }                                           
     }
+    document.getElementById("wygenerowane").innerHTML = export64;
 }
 
 
